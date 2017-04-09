@@ -9,6 +9,9 @@ public class pivotLogin extends javax.swing.JFrame {
     
     //Instanciating the hashing object to hash the password
     Hashing hs = new Hashing();
+    
+    //Instanciating the readuser object to read the hashed password from the user file
+    Readuser ru = new Readuser();
 
     /**
      * Creates new form pivotLogin
@@ -144,9 +147,14 @@ public class pivotLogin extends javax.swing.JFrame {
         dataSourceFrame.setVisible(true);
         String uName = jTextField1.getText();
         String uPwd = jPasswordField1.getText();
+        
+        String hpwd = hs.hashPwd(uPwd);
+        //read the user txt to check password
+        ru.readUserProfile(uName, hpwd);
+        
         //To be deleted for production
         System.out.println(uName);
-        System.out.println(hs.hashPwd(uPwd));
+//        System.out.println(hs.hashPwd(uPwd));
         //Delete to here
         //new pivotDataSource().setVisible(true);
         dispose();
