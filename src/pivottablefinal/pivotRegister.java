@@ -9,6 +9,8 @@ public class pivotRegister extends javax.swing.JFrame {
     
     //Instanciating the hashing object to hash the password
     Hashing hs = new Hashing();
+    //Instanciating the writedata object to create the user profile.txt
+    Writedata wd = new Writedata();
 
     /**
      * Creates new form pivotRegister
@@ -140,11 +142,19 @@ public class pivotRegister extends javax.swing.JFrame {
     }                                        
     // Set "Register" button
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        new pivotLogin().setVisible(true);
+        //new pivotLogin().setVisible(true);
+        //
+        JFrame dataSourceFrame = new pivotLogin();
+        dataSourceFrame.pack();
+        dataSourceFrame.setLocationRelativeTo(null);
+        dataSourceFrame.setVisible(true);
         //include code here
         String uName = jTextField1.getText();
         String uPwd1 = jPasswordField1.getText();
         String uPwd2 = jPasswordField2.getText();
+        
+        //the file.txt is created in the project' root folder
+        wd.writeDataToFile(uName, hs.hashPwd(uPwd2));
         System.out.println(uName);
         System.out.println(hs.hashPwd(uPwd1));
         System.out.println(hs.hashPwd(uPwd2));
