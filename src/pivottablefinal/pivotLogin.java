@@ -141,16 +141,27 @@ public class pivotLogin extends javax.swing.JFrame {
     }// </editor-fold>                        
     // Set "Login" button
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        JFrame dataSourceFrame = new pivotDataSource();
-        dataSourceFrame.pack();
-        dataSourceFrame.setLocationRelativeTo(null);
-        dataSourceFrame.setVisible(true);
+        
         String uName = jTextField1.getText();
         String uPwd = jPasswordField1.getText();
         
         String hpwd = hs.hashPwd(uPwd);
         //read the user txt to check password
-        ru.readUserProfile(uName, hpwd);
+        boolean check = ru.readUserProfile(uName, hpwd);
+        
+        if (check) {
+            JFrame dataSourceFrame = new pivotDataSource();
+            dataSourceFrame.pack();
+            dataSourceFrame.setLocationRelativeTo(null);
+            dataSourceFrame.setVisible(true);            
+        } else {
+            JFrame registerFrame = new pivotRegister();
+            registerFrame.pack();
+            registerFrame.setLocationRelativeTo(null);
+            registerFrame.setVisible(true);
+            //new pivotRegister().setVisible(true);
+            dispose();
+        }
         
         //To be deleted for production
         System.out.println(uName);
